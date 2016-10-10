@@ -10,7 +10,9 @@
 
 #include "GraphicObject.h"
 #include <string>
-
+/**
+ * Graphic object representing an image
+ */
 class Image: public Graphic_Object {
 protected:
 

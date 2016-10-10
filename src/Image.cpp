@@ -6,13 +6,15 @@
  */
 
 #include "Image.h"
-
+/**
+ * Abstract class image
+ */
 Image::Image() {
-	// TODO Auto-generated constructor stub
+	// No Construction needed at this level
 
 }
 
 Image::~Image() {
-	// TODO Auto-generated destructor stub
+	// TODO Should the filename be dallocated?
 }
 

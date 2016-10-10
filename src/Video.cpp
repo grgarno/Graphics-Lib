@@ -6,13 +6,15 @@
  */
 
 #include "Video.h"
-
+/**
+ * All implementation of this abstract object should be at the base level
+ */
 Video::Video() {
-	// TODO Auto-generated constructor stub
+	// Nothing necessary here
 
 }
 
 Video::~Video() {
-	// TODO Auto-generated destructor stub
+	// Nothing necessary here
 }
 

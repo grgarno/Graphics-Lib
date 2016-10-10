@@ -8,11 +8,11 @@
 #include "GraphicObjectNode.h"
 
 Graphic_Object_Node::Graphic_Object_Node() {
-	// TODO Auto-generated constructor stub
+	// No construction needed
 
 }
 
 Graphic_Object_Node::~Graphic_Object_Node() {
-	delete[] Object;
+	delete[] Object; //deletes the object //TODO Should this be deleted here? what if the client wants to add the object to another output?
 }
 

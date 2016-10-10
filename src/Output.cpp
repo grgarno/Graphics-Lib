@@ -6,7 +6,9 @@
  */
 
 #include "Output.h"
-
+/**
+ * Implementation of non-abstract elements of an output
+ */
 Output::Output() {
 	//set defaults
 	Frame_Rate = 29.97;
@@ -17,9 +19,12 @@ Output::Output() {
 }
 
 Output::~Output() {
-	// TODO Auto-generated destructor stub
+	delete pixels;
 }
 
+/**
+ * Adds a graphic object to this output. Uses a linked list.
+ */
 void Output::Add_Graphic_Object(Graphic_Object* Object_To_Render, int LayerID) {
 
 	if (!head) {
@@ -72,6 +77,10 @@ void Output::Add_Graphic_Object(Graphic_Object* Object_To_Render, int LayerID) {
 
 }
 
+
+/**
+ * Removes a graphic object from this output.
+ */
 void Output::Remove_Graphic_Object(Graphic_Object* Object_To_Remove) {
 	Graphic_Object_Node* current_node = head;
 	Graphic_Object_Node* previous_node;
@@ -100,6 +109,7 @@ void Output::Remove_Graphic_Object(Graphic_Object* Object_To_Remove) {
 	 */
 	//delete (current_node); //TODO! Where does a graphic object get deleted!!
 }
+
 /**
  * Loop through linked list of graphic objects, determine the entire composite
  */

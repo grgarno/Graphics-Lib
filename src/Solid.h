@@ -9,7 +9,9 @@
 #define SOLID_H_
 
 #include "GraphicObject.h"
-
+/**
+ * Class representing a solid object. Note that this class is not an abstract class, because it doesn't need to be!
+ */
 class Solid: public Graphic_Object {
 public:
 	Solid();

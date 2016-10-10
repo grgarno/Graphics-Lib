@@ -10,7 +10,9 @@
 
 #include "Output.h"
 
-
+/**
+ * An abstract output representing a decklink output. This output gets created in each platform factory, and is dependent on which platform is running.
+ */
 class Decklink_Output: public Output {
 public:
 	std::string Card_Name;

@@ -8,11 +8,11 @@
 #include "DesktopOutput.h"
 
 Desktop_Output::Desktop_Output() {
-	// TODO Auto-generated constructor stub
+	// The constructor should implemented in the concrete implementation
 
 }
 
 Desktop_Output::~Desktop_Output() {
-	// TODO Auto-generated destructor stub
+	// All memory management should be taken care of in a more concrete class (Either in the class Output, or in the concrete class).
 }
 

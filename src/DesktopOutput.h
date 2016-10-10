@@ -9,7 +9,9 @@
 #define DESKTOPOUTPUT_H_
 
 #include "Output.h"
-
+/**
+ * An abstract output representing a desktop output. This output gets created in each platform factory, and is dependent on which platform is running.
+ */
 class Desktop_Output: public Output {
 public:
 	int x;

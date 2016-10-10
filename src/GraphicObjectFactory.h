@@ -14,7 +14,9 @@
 #include "Image.h"
 #include "Solid.h"
 
-
+/**
+ * A factory to create graphic objects.
+ */
 class Graphic_Object_Factory {
 protected:
 	Text* Set_Up_Text(Text* Text_To_Set_Up, std::string Text, std::string Font, int Size);

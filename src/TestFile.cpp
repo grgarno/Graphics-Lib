@@ -22,7 +22,9 @@
 
 using namespace std;
 int os = 0;
-
+/**
+ * This file serves as a test file, and served as the platform for which the presentation in class was presented from.
+ */
 Graphic_Object_Factory* getFactory(int os) {
 	switch (os) {
 	case 0: //windows, defined in pre-processing
@@ -93,7 +95,7 @@ int main() {
 	Solid_Other->y = 50;
 	Solid_Other->width = 200;
 	Solid_Other->height = 200;
-	//loop through presentation slides
+	//loop through presentation slides. They are images stored at the following filepath.
 	for(int count = 1; count <=10; count++){
 		Image* Image_New = Factory->Create_Image();
 		Image_New->Source_File = "/Users/grgarno/Desktop/Dropbox/CSCI 426/assignment2gfx/images/Assignment2.pptxSlide" + std::to_string(count) + ".jpg";

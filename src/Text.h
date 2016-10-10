@@ -13,7 +13,9 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-
+/**
+ * Abstract class representing a text object
+ */
 class Text: public Graphic_Object {
 protected:
 	FT_Library* library;

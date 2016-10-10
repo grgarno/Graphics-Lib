@@ -8,6 +8,9 @@
 #ifndef GRAPHICOBJECTNODE_H_
 #define GRAPHICOBJECTNODE_H_
 #include "GraphicObject.h"
+/**
+ * Node object that makes up a linked list of graphic objects on an output.
+ */
 class Graphic_Object_Node {
 public:
 	Graphic_Object_Node();

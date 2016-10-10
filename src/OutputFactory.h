@@ -10,7 +10,9 @@
 
 #include "DesktopOutput.h"
 #include "DecklinkOutput.h"
-
+/**
+ * Factory for creating various kinds of outputs
+ */
 class Output_Factory {
 public:
 	Output_Factory();

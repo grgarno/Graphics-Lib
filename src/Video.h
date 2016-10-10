@@ -10,7 +10,9 @@
 
 #include "GraphicObject.h"
 #include <string>
-
+/**
+ * Abstract class representing a video object
+ */
 class Video: public Graphic_Object {
 protected:
 	std::string Source_File;

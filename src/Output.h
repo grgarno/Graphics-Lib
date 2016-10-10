@@ -10,7 +10,9 @@
 
 #include "GraphicObject.h"
 #include "GraphicObjectNode.h"
-
+/**
+ * Class representing an abstract output
+ */
 class Output {
 
 

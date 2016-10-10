@@ -11,9 +11,11 @@
 #include <vector>
 #import <string>
 
+/**
+ * An abstract representation of a graphics object used in each output to render to the screen, and by the client to control the object.
+ * Includes the attributes that every graphic object should have.
+ */
 class Graphic_Object {
-
-
 
 public:
 	int width;
@@ -33,9 +35,6 @@ public:
 	virtual std::string Get_Name() = 0;
 	virtual uint32_t** Refresh_Frame_Buffer() = 0;
 
-
 };
-
-
 
 #endif /* GRAPHICOBJECT_H_ */

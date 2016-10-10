@@ -8,11 +8,11 @@
 #include "OutputFactory.h"
 
 Output_Factory::Output_Factory() {
-	// TODO Auto-generated constructor stub
+	// No initialization necessary
 
 }
 
 Output_Factory::~Output_Factory() {
-	// TODO Auto-generated destructor stub
+	// No destruction needed at this level
 }
 

@@ -8,18 +8,18 @@
 #include "Solid.h"
 
 Solid::Solid() {
-	// TODO Auto-generated constructor stub
+	// Initialization not necessary. Taken care of by factory.
 
 }
 
 Solid::~Solid() {
-	// TODO Auto-generated destructor stub
+	// Destruction taken care of already.
 }
 std::string Solid::Get_Name() {
 	return "Generic Solid";
 }
 /**
- * Refresh
+ * Refresh-- Creates the solid
  */
 uint32_t** Solid::Refresh_Frame_Buffer() {
 	valid = false;

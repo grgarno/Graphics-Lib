@@ -8,7 +8,7 @@
 #include "Text.h"
 
 Text::Text() {
-	// TODO Auto-generated constructor stub
+	// TODO Finish constructor
 	//Text = "";
 	Font = "";
 	Font_Size = 12;
@@ -22,13 +22,19 @@ Text::Text() {
 }
 
 Text::~Text() {
-	// TODO Auto-generated destructor stub
+	// TODO Create proper destructor
 }
 
+/**
+ * Set the library for this text object
+ */
 void Text::Set_Library(FT_Library* new_lib) {
 	library = new_lib;
 }
 
+/**
+ * Set the font for this text object.
+ */
 FT_Face* Text::Set_Font_Face(std::string Path_To_Font) {
 	error = FT_New_Face(*library, Path_To_Font.c_str(), 0, &face);
 	if (error == FT_Err_Unknown_File_Format) {
@@ -41,7 +47,9 @@ FT_Face* Text::Set_Font_Face(std::string Path_To_Font) {
 	return &face;
 
 }
-
+/**
+ * Set the text of this object.
+ */
 void Text::Set_Text_Content(std::string Text){
 	this->Text_Content = Text;
 	char const *Simple_String = Text.c_str();
@@ -62,31 +70,53 @@ void Text::Set_Text_Content(std::string Text){
 	}
 
 }
-
+/**
+ * Set the font size of this text
+ */
 void Text::Set_Font_Size(int Pixel_Height){
  this->Font_Size = Pixel_Height;
  error = FT_Set_Char_Size(face, 0, (Pixel_Height * 64), 300, 300);
 }
+/**
+ * Set the font color for this object.
+ */
 void Text::Set_Font_Color(int* Color_RGBA){
  this->Text_Color_RGBA = Color_RGBA;
 }
+/**
+ * Set the outline size for this object. //TODO not implemented
+ */
 void Text::Set_Outline_Size(int Pixel_Outline){
 
 }
+/**
+ * Set the outline color for this text object //TODO not implemented
+ */
 void Text::Set_Outline_Color(int* Color_RGBA){
 
 }
+/**
+ * Set the shadow size for this text object //TODO not implemented //TODO Refactor so the spelling is right!
+ */
 void Text::Set_Shaddow_Size(int Pixel_Height){
 
 }
+/**
+ * Set the shadow bounds for this object //TODO not implemented //TODO Refactor so the spelling is right!
+ */
 void Text::Set_Shaddow_Bounds(int* Shaddow_Bounds){
 	//Must Be in the text bounds to show
 
 }
+/**
+ * Set the shadow color for this object //TODO not implemented //TODO Refactor so the spelling is right!
+ */
 void Text::Set_Shaddow_Color(int* Color_RGBA){
 
 }
-
+/**
+ * Render the text to the frame buffer //TODO revise implementation.
+ */
 uint32_t** Text::Refresh_Frame_Buffer(){
 	/*
 	unsigned char image[height][width];
@@ -113,5 +143,5 @@ uint32_t** Text::Refresh_Frame_Buffer(){
 	}
 	*/
 
-	return Frame_Buffer;
+	return Frame_Buffer; //do nothing.
 }
