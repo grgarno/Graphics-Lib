@@ -15,6 +15,7 @@ Output::Output() {
 	width = 1920;
 	height = 1080;
 	opacity = 1.0;
+	pixels = nullptr;
 
 }
 

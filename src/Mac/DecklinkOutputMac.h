@@ -8,6 +8,7 @@
 #ifndef MAC_DECKLINKOUTPUTMAC_H_
 #define MAC_DECKLINKOUTPUTMAC_H_
 #include "../DecklinkOutput.h"
+#include <functional>
 class Decklink_Output_Mac: public Decklink_Output {
 public:
 	Decklink_Output_Mac();
