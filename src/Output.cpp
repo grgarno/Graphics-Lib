@@ -27,88 +27,83 @@ Output::~Output() {
  * Adds a graphic object to this output. Uses a linked list.
  */
 void Output::Add_Graphic_Object(Graphic_Object* Object_To_Render, int LayerID) {
-
+	Graphic_Object_Node* new_object = new Graphic_Object_Node;
+	new_object->Object = Object_To_Render;
+	new_object->Layer_ID = LayerID;
 	if (!head) {
 
-		head = new Graphic_Object_Node;
+		head = new_object;
 
 		head->next = nullptr;
-
-		head->Object = Object_To_Render;
-		head->Layer_ID = LayerID;
+		head->previous = nullptr;
 
 	} else if (head->Layer_ID > LayerID) { //define new head
+		new_object->next = head;
+		new_object->previous = nullptr;
+		head->previous = new_object;
+		head = new_object;
 
-		head->previous = new Graphic_Object_Node;
-		head->next = head;
-		head->previous->previous = nullptr;
-		head = head->previous;
-		head->Object = Object_To_Render;
-		head->Layer_ID = LayerID;
 	} else {
 		Graphic_Object_Node* current_node = head;
-		Graphic_Object_Node* new_object = new Graphic_Object_Node;
-		new_object->Object = Object_To_Render;
-		new_object->Layer_ID = LayerID;
-		Graphic_Object_Node* next_node = nullptr;
-		while (current_node->next != nullptr) { //find the place in the lili to insert the object, either at the end, or where the layer ID is larger
+		Graphic_Object_Node* last_node = nullptr;
 
+		while (current_node->Layer_ID <= LayerID) { //find the place in the lili to insert the object, either at the end, or where the layer ID is larger
+			last_node = current_node;
 
-			if(LayerID > current_node->Layer_ID) {
+			current_node = current_node->next;
+			if (current_node == nullptr) {
 				break;
 			}
-			current_node = current_node->next;
 
 		}
-		if(current_node->next != nullptr){
-			next_node = current_node->next->next;
-		}
 
-		//insert to the list
-		//new_object->previous = current_node;
-		current_node->next = new_object;
-		new_object->next = next_node;
-//		if (next_node != nullptr) {
-//			next_node->previous = new_object;
-//		}
+		last_node->next = new_object;
+		new_object->previous = last_node;
+		new_object->next = current_node;
+		if (current_node != nullptr) {
+			current_node->previous = new_object;
+		}
 
 	}
 
-	//set the properties
-
 }
-
 
 /**
  * Removes a graphic object from this output.
  */
-void Output::Remove_Graphic_Object(Graphic_Object* Object_To_Remove) {
+void Output::Remove_Graphic_Object(Graphic_Object* Object_To_Remove,
+		bool Dispose_Object) {
 	Graphic_Object_Node* current_node = head;
-	Graphic_Object_Node* previous_node;
-	Graphic_Object_Node* next_node;
-	while (current_node->Object != Object_To_Remove) {
-		if (current_node->next == nullptr) {
+	Graphic_Object_Node* previous_node = nullptr;
+
+	while (true) {
+		if (current_node->Object == Object_To_Remove) {
+			if (previous_node == nullptr) { //delete head
+				head = current_node->next;
+			} else {
+				previous_node->next = current_node->next;
+				if (current_node->next != nullptr) {
+					current_node->next->previous = previous_node;
+				}
+
+			}
+			if (Dispose_Object) {
+				delete current_node->Object; //prevent memory leak
+			}
+
+			delete current_node;
 			break;
-		} else {
-			previous_node = current_node;
-			current_node = current_node->next;
+		}
+
+		previous_node = current_node;
+
+		current_node = current_node->next;
+
+		if (current_node == nullptr) {
+			break;
 		}
 	}
-	if (current_node->next) {
-		previous_node->next = current_node->next;
-	}
-	//next_node = current_node->next;
-	/*
-	 if (previous_node && next_node) {
-	 previous_node->next = next_node;
-	 next_node->previous = previous_node;
-	 } else if (previous_node) {
-	 previous_node->next = nullptr;
-	 } else if(next_node != nullptr) {
-	 next_node->previous = nullptr;
-	 }
-	 */
-	//delete (current_node); //TODO! Where does a graphic object get deleted!!
+
 }
 
 /**
@@ -130,7 +125,12 @@ void Output::Compose_Pixels() {
 		uint8_t red_under;
 		uint8_t green_under;
 		uint8_t blue_under;
-		uint8_t denom;
+		double alpha_norm = 0.0;
+
+		uint32_t red_out;
+		uint32_t green_out;
+		uint32_t blue_out;
+		uint32_t alpha_out;
 
 		//td::fill_n(*pixels, (width*height*4), 0);
 
@@ -146,14 +146,16 @@ void Output::Compose_Pixels() {
 			if (object->valid == false) {
 				object->Refresh_Frame_Buffer();
 			}
-
 			for (int objy = object->y; objy < (object->height + object->y);
 					objy++) {
 				for (int objx = object->x; objx < (object->width + object->x);
 						objx++) {
 
 					/**
-					 * Alpha formula: output_color = ((color_over * alpha_over) + (color_under * alpha_under * (1 - alpha_over)))/ (alpha_over + (alpha_under * (1 - alpha over)))
+					 * Taken from: http://www.codeguru.com/cpp/cpp/algorithms/general/article.php/c15989/Tip-An-Optimized-Formula-for-Alpha-Blending-Pixels.htm
+					 * Optomized Alpha formula: out = ((source * alpha) + (destination * (255 - alpha)))>>8. (Alpha is destination alpha)
+					 *
+					 * Alpha out = alpha dest + alpha source
 
 					 */
 
@@ -173,36 +175,18 @@ void Output::Compose_Pixels() {
 					alpha_over = ((object->Frame_Buffer[objy - object->y][objx
 							- object->x] & 0xff000000) >> 24) * object->Opacity; //calculate source opacity here
 
-					denom = (alpha_over + (alpha_under * (1 - alpha_over)));
-					if (denom == 0) {
-						pixels[objy][objx] = (0 << 24) + (0 << 16) + (0 << 8)
-								+ 0;
-					} else {
 
-//						pixels[objy][objx] = ((int) ((alpha_over + alpha_under)
-//								* opacity) << 24)
-//								+ ((((red_over * alpha_over)
-//										+ (red_under * alpha_under
-//												* (1 - alpha_over))) / denom)
-//										<< 16)
-//								+ ((((green_over * alpha_over)
-//										+ (green_under * alpha_under
-//												* (1 - alpha_over))) / denom)
-//										<< 8)
-//								+ ((((blue_over * alpha_over)
-//										+ (blue_under * alpha_under
-//												* (1 - alpha_over))) / denom)); //composit red
-						pixels[objy][objx] = (255 << 24) + (red_over << 16) + (green_over <<8) + blue_over;
+					alpha_norm = ((double) alpha_over / 255.0);
+					red_out = red_over * alpha_norm
+							+ red_under * (1.0 - alpha_norm); //
+					green_out = green_over * alpha_norm
+							+ green_under * (1.0 - alpha_norm); //
+					blue_out = blue_over * alpha_norm
+							+ blue_under * (1.0 - alpha_norm); //
+					alpha_out = 40; //TODO I should not be forty!
+					pixels[objy][objx] = (alpha_out << 24) + (red_out << 16)
+							+ (green_out << 8) + blue_out;
 
-
-
-					}
-
-					// std::cout<<pixels[count]<<std::endl;
-
-					//					if(count_pixels > max_pixels){
-					//						break;
-					//					}
 
 				}
 

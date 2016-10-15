@@ -13,6 +13,5 @@ Graphic_Object_Node::Graphic_Object_Node() {
 }
 
 Graphic_Object_Node::~Graphic_Object_Node() {
-	delete[] Object; //deletes the object //TODO Should this be deleted here? what if the client wants to add the object to another output?
+//Don't delete the object...
 }
-

@@ -11,7 +11,7 @@
  * The impelementation of the Graphic Object abstract factory.
  */
 
-Graphic_Object::Graphic_Object(){//initialize values
+Graphic_Object::Graphic_Object() { //initialize values
 
 	Opacity = 1.0;
 	Maintain_Aspect_Ratio = true;
@@ -28,9 +28,12 @@ Graphic_Object::Graphic_Object(){//initialize values
 
 }
 
-Graphic_Object::~Graphic_Object(){//delete any pointers. All member variables will be deallocated automatically
-	if(Frame_Buffer){
-		delete Frame_Buffer;
+Graphic_Object::~Graphic_Object() { //delete any pointers. All member variables will be deallocated automatically
+	if (Frame_Buffer != nullptr) {
+		for (int i = 0; i < height; ++i) {
+			delete[] Frame_Buffer[i];
+		}
+		delete[] Frame_Buffer;
 	}
 
 }

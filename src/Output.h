@@ -34,7 +34,7 @@ public:
 	/**
 	 * Removes an item from the output.
 	 */
-	void Remove_Graphic_Object(Graphic_Object* Object_To_Remmove);
+	void Remove_Graphic_Object(Graphic_Object* Object_To_Remmove, bool Dispose_Object);
 	/**
 	 * Compose the pixels from all the graphic objects added
 	 */

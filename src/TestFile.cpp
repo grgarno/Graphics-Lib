@@ -68,7 +68,7 @@ int main() {
 	Graphic_Object_Factory* Factory = getFactory(input);
 	Output_Factory* OutputF = getOutputFactory(input);
 	//create output
-	Output* out = OutputF->Create_Desktop_Output(29.97, 1280, 720, 1440,0);
+	Output* out = OutputF->Create_Desktop_Output(29.97, 1280, 720, 500,0);
 	//start output
 	out->Begin_Output();
 
@@ -95,13 +95,16 @@ int main() {
 	Solid_Other->y = 50;
 	Solid_Other->width = 200;
 	Solid_Other->height = 200;
+	out->Add_Graphic_Object(Solid_Other, 30);
+	out->Add_Graphic_Object(Solid_Black, 20);
 	//loop through presentation slides. They are images stored at the following filepath.
 	for(int count = 1; count <=10; count++){
 		Image* Image_New = Factory->Create_Image();
 		Image_New->Source_File = "/Users/grgarno/Desktop/Dropbox/CSCI 426/assignment2gfx/images/Assignment2.pptxSlide" + std::to_string(count) + ".jpg";
-		out->Add_Graphic_Object(Image_New, count);
+		Image_New->Opacity = 0.1;
+		out->Add_Graphic_Object(Image_New, 1);
 		system("read");
-		//out->Remove_Graphic_Object(Image_New);
+		out->Remove_Graphic_Object(Image_New, true);
 
 	}
 
