@@ -44,6 +44,7 @@ public:
 	virtual void Stop_Output() = 0;
 	/**
 	 * Returns a COPY of the memory on this output, used for previews or some transitions.
+	 * //TODO Change the name to something that makes more sense.
 	 */
 	virtual uint32_t** Get_Preview_Image() = 0;
 };
