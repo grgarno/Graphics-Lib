@@ -39,7 +39,9 @@ public:
 	 * Compose the pixels from all the graphic objects added
 	 */
 	void Compose_Pixels();
-
+	/**
+	* Begins the output of the frame buffer (Card, Desktop, etc).
+	*/
 	virtual void Begin_Output() = 0;
 	virtual void Stop_Output() = 0;
 	/**
