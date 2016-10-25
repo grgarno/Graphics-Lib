@@ -42,6 +42,9 @@ public:
 
 	virtual void Begin_Output() = 0;
 	virtual void Stop_Output() = 0;
+	/**
+	 * Returns a COPY of the memory on this output, used for previews or some transitions.
+	 */
 	virtual uint32_t** Get_Preview_Image() = 0;
 };
 
