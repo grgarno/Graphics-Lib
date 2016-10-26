@@ -79,7 +79,7 @@ int main() {
 	Solid* Solid_Black = Factory->Create_Solid();
 	Solid_Black->Background_Color_R  = 255;
 	Solid_Black->Background_Color_G = 255;
-	Solid_Black->Background_Color_B = 0;
+	Solid_Black->Background_Color_B = 255;
 	Solid_Black->Background_Color_A  = 128;
 	Solid_Black->x = 200;
 	Solid_Black->y = 200;
@@ -88,20 +88,41 @@ int main() {
 	//new solid
 	Solid* Solid_Other = Factory->Create_Solid();
 	Solid_Other->Background_Color_R  = 255;
-	Solid_Other->Background_Color_G = 0;
-	Solid_Other->Background_Color_B = 0;
+	Solid_Other->Background_Color_G = 255;
+	Solid_Other->Background_Color_B = 255;
 	Solid_Other->Background_Color_A  = 128;
 	Solid_Other->x = 50;
 	Solid_Other->y = 50;
 	Solid_Other->width = 200;
 	Solid_Other->height = 200;
+	//new solid
+	Solid* Solid_Third = Factory->Create_Solid();
+	Solid_Third->Background_Color_R  = 255;
+	Solid_Third->Background_Color_G = 255;
+	Solid_Third->Background_Color_B = 255;
+	Solid_Third->Background_Color_A  = 128;
+	Solid_Third->x = 200;
+	Solid_Third->y = 100;
+	Solid_Third->width = 200;
+	Solid_Third->height = 200;
+
+
+	//new text object
+	Text* Text_Object = Factory->Create_Text("Hello World", "/Library/Fonts/Microsoft/Century Gothic", 233);
+	Text_Object->x = 500;
+	Text_Object->y = 500;
+	//TODO Add text object to output
+
 	out->Add_Graphic_Object(Solid_Other, 30);
+	out->Add_Graphic_Object(Solid_Third, 25);
+
 	out->Add_Graphic_Object(Solid_Black, 20);
+
 	//loop through presentation slides. They are images stored at the following filepath.
-	for(int count = 1; count <=10; count++){
+	for(int count = 1; count <=2; count++){
 		Image* Image_New = Factory->Create_Image();
 		Image_New->Source_File = "/Users/grgarno/Desktop/Dropbox/CSCI 426/assignment2gfx/images/Assignment2.pptxSlide" + std::to_string(count) + ".jpg";
-		Image_New->Opacity = 0.1;
+		Image_New->Opacity = 0.5;
 		out->Add_Graphic_Object(Image_New, 1);
 		system("read");
 		out->Remove_Graphic_Object(Image_New, true);

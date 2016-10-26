@@ -27,9 +27,12 @@ Graphic_Object_Factory::~Graphic_Object_Factory() {
  */
 Text* Graphic_Object_Factory::Set_Up_Text(Text* Text_To_Set_Up, std::string Text, std::string Font, int size){
 	Text_To_Set_Up->Set_Library(&library);
+
 	Text_To_Set_Up->Set_Font_Face(Font);
 	Text_To_Set_Up->Set_Font_Size(size);
+
 	Text_To_Set_Up->Set_Text_Content(Text);
+
 	return Text_To_Set_Up;
 }
 

@@ -21,7 +21,7 @@ protected:
 	FT_Library* library;
 	FT_Face face;
 	FT_Error error;
-	std::vector<FT_GlyphSlot> *Rendered_Glyph_Array;
+	std::vector<FT_GlyphSlot> Rendered_Glyph_Array;
 public:
 	std::string Text_Content;
 	std::string Font;

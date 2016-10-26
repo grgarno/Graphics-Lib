@@ -177,13 +177,19 @@ void Output::Compose_Pixels() {
 
 
 					alpha_norm = ((double) alpha_over / 255.0);
+					if(alpha_over + alpha_under > 255){//stuff happens here
+
+					}else{
+
+					}
+
 					red_out = red_over * alpha_norm
 							+ red_under * (1.0 - alpha_norm); //
 					green_out = green_over * alpha_norm
 							+ green_under * (1.0 - alpha_norm); //
 					blue_out = blue_over * alpha_norm
 							+ blue_under * (1.0 - alpha_norm); //
-					alpha_out = 40; //TODO I should not be forty!
+					alpha_out = alpha_over + alpha_under; //TODO I should not be forty!
 					pixels[objy][objx] = (alpha_out << 24) + (red_out << 16)
 							+ (green_out << 8) + blue_out;
 

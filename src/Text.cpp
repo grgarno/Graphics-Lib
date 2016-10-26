@@ -56,16 +56,30 @@ void Text::Set_Text_Content(std::string Text){
 	int Glyph_Index;
 	width = 0;
 	height = 0;
+
+
+	Rendered_Glyph_Array.reserve(Text.length());
 	for(int i = 0; i < Text.length(); i++){
 		Glyph_Index = FT_Get_Char_Index(face, Simple_String[i]);
+
 		error = FT_Load_Glyph(face, Glyph_Index, FT_LOAD_DEFAULT);
 		//TODO error handling!
+		if(error){
+			std::cout<<"There was an error creating the glyph"<<std::endl;
+		}
+		error = false;
 		error = FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
-		Rendered_Glyph_Array->push_back(face->glyph);
+		if(error){
+			std::cout<<"There was an error rendering the glyph"<<std::endl;
+		}
+		Rendered_Glyph_Array.push_back(face->glyph);
+
 		width = width + face->glyph->bitmap.width;
 		//if(height < face->glyph->bitmap.rows){
 		//	height = face->glyph->bitmap.rows);
+
 		//}
+
 
 	}
 
