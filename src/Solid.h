@@ -8,7 +8,12 @@
 #ifndef SOLID_H_
 #define SOLID_H_
 
+#ifndef _GRAPHICOBJECT_INCLUDED // is it already included?
+#define _GRAPHICOBJECT_INCLUDED // define this so we know it's included
 #include "GraphicObject.h"
+#endif
+
+
 /**
  * Class representing a solid object. Note that this class is not an abstract class, because it doesn't need to be!
  */

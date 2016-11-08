@@ -7,9 +7,21 @@
 
 #ifndef GRAPHICOBJECT_H_
 #define GRAPHICOBJECT_H_
+#ifndef _IOSTREAM_INCLUDED // is it already included?
+#define _IOSTREAM_INCLUDED // define this so we know it's included
 #include <iostream>
+#endif
+
+#ifndef _VECTOR_INCLUDED // is it already included?
+#define _VECTOR_INCLUDED // define this so we know it's included
 #include <vector>
-#import <string>
+#endif
+
+#ifndef _STRING_INCLUDED // is it already included?
+#define _STRING_INCLUDED // define this so we know it's included
+#include <string>
+#endif
+
 
 /**
  * An abstract representation of a graphics object used in each output to render to the screen, and by the client to control the object.

@@ -145,6 +145,7 @@ void Output::Compose_Pixels() {
 			object = current_node->Object;
 			if (object->valid == false) {
 				object->Refresh_Frame_Buffer();
+				//continue;
 			}
 			for (int objy = object->y; objy < (object->height + object->y);
 					objy++) {

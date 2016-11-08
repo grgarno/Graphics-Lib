@@ -8,7 +8,10 @@
 #ifndef DESKTOPOUTPUT_H_
 #define DESKTOPOUTPUT_H_
 
+#ifndef _OUTPUT_INCLUDED // is it already included?
+#define _OUTPUT_INCLUDED // define this so we know it's included
 #include "Output.h"
+#endif
 /**
  * An abstract output representing a desktop output. This output gets created in each platform factory, and is dependent on which platform is running.
  */

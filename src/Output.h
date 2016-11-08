@@ -8,13 +8,40 @@
 #ifndef OUTPUT_H_
 #define OUTPUT_H_
 
+#ifndef _IOSTREAM_INCLUDED // is it already included?
+#define _IOSTREAM_INCLUDED // define this so we know it's included
+#include <iostream>
+#endif
+
+#ifndef _THREAD_INCLUDED // is it already included?
+#define _THREAD_INCLUDED // define this so we know it's included
+#include <thread>
+#endif
+
+#ifndef _CTIME_INCLUDED // is it already included?
+#define _CTIME_INCLUDED // define this so we know it's included
+#include <ctime>
+#endif
+
+#ifndef _PTHREAD_INCLUDED // is it already included?
+#define _PTHREAD_INCLUDED // define this so we know it's included
+#include <pthread.h>
+#endif
+
+#ifndef _GRAPHICOBJECT_INCLUDED // is it already included?
+#define _GRAPHICOBJECT_INCLUDED // define this so we know it's included
 #include "GraphicObject.h"
+#endif
+
+#ifndef _GRAPHICOBJECTNODE_INCLUDED // is it already included?
+#define _GRAPHICOBJECTNODE_INCLUDED // define this so we know it's included
 #include "GraphicObjectNode.h"
+#endif
+
 /**
  * Class representing an abstract output
  */
 class Output {
-
 
 protected:
 
@@ -34,14 +61,15 @@ public:
 	/**
 	 * Removes an item from the output.
 	 */
-	void Remove_Graphic_Object(Graphic_Object* Object_To_Remmove, bool Dispose_Object);
+	void Remove_Graphic_Object(Graphic_Object* Object_To_Remmove,
+			bool Dispose_Object);
 	/**
 	 * Compose the pixels from all the graphic objects added
 	 */
 	void Compose_Pixels();
 	/**
-	* Begins the output of the frame buffer (Card, Desktop, etc).
-	*/
+	 * Begins the output of the frame buffer (Card, Desktop, etc).
+	 */
 	virtual void Begin_Output() = 0;
 	virtual void Stop_Output() = 0;
 	/**

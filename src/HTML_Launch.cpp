@@ -1,31 +1,67 @@
-//============================================================================
-// Name        : GraphicsObject.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+/*
+ * HTML_Launch.cpp
+ *
+ *  Created on: 07.11.2016
+ *      Author: grgarno
+ */
 
-/**
+#ifndef _IOSTREAM_INCLUDED // is it already included?
+#define _IOSTREAM_INCLUDED // define this so we know it's included
 #include <iostream>
-#include "GraphicObjectFactory.h"
+#endif
 
+#ifndef _MACGRAPHICOBJECTFACTORY_INCLUDED // is it already included?
+#define _MACGRAPHICOBJECTFACTORY_INCLUDED // define this so we know it's included
 #include "Mac/MacGraphicObjectFactory.h"
+#endif
 
+#ifndef _OUTPUTFACTORY_INCLUDED // is it already included?
+#define _OUTPUTFACTORY_INCLUDED // define this so we know it's included
 #include "OutputFactory.h"
+#endif
 
+#ifndef _GRAPHICOBJECTFACTORY_INCLUDED // is it already included?
+#define _GRAPHICOBJECTFACTORY_INCLUDED // define this so we know it's included
+#include "GraphicObjectFactory.h"
+#endif
+
+#ifndef _GRAPHICOBJECTFACTORY_INCLUDED // is it already included?
+#define _GRAPHICOBJECTFACTORY_INCLUDED // define this so we know it's included
+#include "GraphicObjectFactory.h"
+#endif
+
+
+#ifndef _MACOUTPUTFACTORY_INCLUDED // is it already included?
+#define _MACOUTPUTFACTORY_INCLUDED // define this so we know it's included
 #include "Mac/MacOutputFactory.h"
+#endif
 
+#ifndef _TEXT_INCLUDED // is it already included?
+#define _TEXT_INCLUDED // define this so we know it's included
 #include "Text.h"
+#endif
+#ifndef _VIDEO_INCLUDED // is it already included?
+#define _VIDEO_INCLUDED // define this so we know it's included
 #include "Video.h"
+#endif
+#ifndef _IMAGE_INCLUDED // is it already included?
+#define _IMAGE_INCLUDED // define this so we know it's included
 #include "Image.h"
+#endif
+#ifndef _SOLID_INCLUDED // is it already included?
+#define _SOLID_INCLUDED // define this so we know it's included
 #include "Solid.h"
+#endif
+
+
+
+
 
 using namespace std;
 int os = 0;
 /**
  * This file serves as a test file, and served as the platform for which the presentation in class was presented from.
- *//**
+ */
 Graphic_Object_Factory* getFactory(int os) {
 
 		return (new Mac_Graphic_Object_Factory());
@@ -43,7 +79,7 @@ int main() {
 	Graphic_Object_Factory* Factory = getFactory(0);
 	Output_Factory* OutputF = getOutputFactory(0);
 	//create output
-	Output* out = OutputF->Create_Desktop_Output(29.97, 1280, 720, 100,0);
+	Output* out = OutputF->Create_Output("HTML, width:720, height:480, frame_rate:29.97");
 	//start output
 	out->Begin_Output();
 
@@ -100,16 +136,7 @@ int main() {
 
 	out->Add_Graphic_Object(Solid_Black, 20);
 	out->Add_Graphic_Object(Text_Object, 50);
-	std::string line_input = "";
-	std::string input = "";
-	while(line_input.compare("`") != 0){
-		std::getline(cin, line_input);
-		input = input + line_input;
-		if(line_input.compare("=") == 0){
-			Text_Object->Set_Text_Content(input + '\n');
-			input = "";
-		}
-	}
+
 	//loop through presentation slides. They are images stored at the following filepath.
 	for(int count = 1; count <=2; count++){
 		Image* Image_New = Factory->Create_Image();
@@ -126,4 +153,4 @@ int main() {
 
 	return 0;
 }
-*/
+

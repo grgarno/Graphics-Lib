@@ -8,11 +8,35 @@
 #ifndef GRAPHICOBJECTFACTORY_H_
 #define GRAPHICOBJECTFACTORY_H_
 
+#ifndef _IOSTREAM_INCLUDED // is it already included?
+#define _IOSTREAM_INCLUDED // define this so we know it's included
 #include <iostream>
+#endif
+
+#ifndef _TEXT_INCLUDED // is it already included?
+#define _TEXT_INCLUDED // define this so we know it's included
 #include "Text.h"
+#endif
+
+#ifndef _VIDEO_INCLUDED // is it already included?
+#define _VIDEO_INCLUDED // define this so we know it's included
 #include "Video.h"
+#endif
+
+#ifndef _IMAGE_INCLUDED // is it already included?
+#define _IMAGE_INCLUDED // define this so we know it's included
 #include "Image.h"
+#endif
+
+#ifndef _SOLID_INCLUDED // is it already included?
+#define _SOLID_INCLUDED // define this so we know it's included
 #include "Solid.h"
+#endif
+
+
+
+
+
 
 /**
  * A factory to create graphic objects.
