@@ -10,10 +10,46 @@
 #include <iostream>
 #endif
 
+#ifdef _WIN32 //include if on windows.
+#ifndef _WINDOWSGRAPHICOBJECTFACTORY_INCLUDED // is it already included?
+#define _WINDOWSGRAPHICOBJECTFACTORY_INCLUDED // define this so we know it's included
+#include "Windows/WindowsGraphicObjectFactory.h"
+#endif
+
+#ifndef _WINDOWSOUTPUTFACTORY_INCLUDED // is it already included?
+#define _WINDOWSOUTPUTFACTORY_INCLUDED // define this so we know it's included
+#include "Windows/WindowsOutputFactory.h"
+#endif
+#endif
+
+#ifdef __MACH__ //include if on mac
 #ifndef _MACGRAPHICOBJECTFACTORY_INCLUDED // is it already included?
 #define _MACGRAPHICOBJECTFACTORY_INCLUDED // define this so we know it's included
 #include "Mac/MacGraphicObjectFactory.h"
 #endif
+
+#ifndef _MACOUTPUTFACTORY_INCLUDED // is it already included?
+#define _MACOUTPUTFACTORY_INCLUDED // define this so we know it's included
+#include "Mac/MacOutputFactory.h"
+#endif
+#endif
+
+
+#ifdef __linux__//include if on linux
+#ifndef _LINUXGRAPHICOBJECTFACTORY_INCLUDED // is it already included?
+#define _LINUXGRAPHICOBJECTFACTORY_INCLUDED // define this so we know it's included
+#include "Linux/LinuxGraphicObjectFactory.h"
+#endif
+
+#ifndef _LINUXOUTPUTFACTORY_INCLUDED // is it already included?
+#define _LINUXOUTPUTFACTORY_INCLUDED // define this so we know it's included
+#include "Linux/LinuxOutputFactory.h"
+#endif
+#endif
+
+
+
+
 
 #ifndef _OUTPUTFACTORY_INCLUDED // is it already included?
 #define _OUTPUTFACTORY_INCLUDED // define this so we know it's included
@@ -31,10 +67,6 @@
 #endif
 
 
-#ifndef _MACOUTPUTFACTORY_INCLUDED // is it already included?
-#define _MACOUTPUTFACTORY_INCLUDED // define this so we know it's included
-#include "Mac/MacOutputFactory.h"
-#endif
 
 #ifndef _TEXT_INCLUDED // is it already included?
 #define _TEXT_INCLUDED // define this so we know it's included
@@ -58,26 +90,50 @@
 
 
 using namespace std;
-int os = 0;
+
 /**
  * This file serves as a test file, and served as the platform for which the presentation in class was presented from.
  */
-Graphic_Object_Factory* getFactory(int os) {
+Graphic_Object_Factory* getFactory() {
+#ifdef _WIN32
+   return (new Windows_Graphic_Object_Factory());
+#endif
 
+#ifdef __MACH__
 		return (new Mac_Graphic_Object_Factory());
+#endif
+
+
+#ifdef __linux__
+		return (new Linux_Graphic_Object_Factory());
+#endif
+
+		//cannot compile on other platforms.
 
 }
 
-Output_Factory* getOutputFactory(int os){
+Output_Factory* getOutputFactory(){
+#ifdef _WIN32
+   return (new Windows_Output_Factory());
+#endif
 
-		return (new Mac_Output_Factory());
+#ifdef __MACH__
+   return (new Mac_Output_Factory());
+#endif
+
+
+#ifdef __linux__
+		return (new Linux_Output_Factory());
+#endif
+
+
 
 }
 
 int main() {
 
-	Graphic_Object_Factory* Factory = getFactory(0);
-	Output_Factory* OutputF = getOutputFactory(0);
+	Graphic_Object_Factory* Factory = getFactory();
+	Output_Factory* OutputF = getOutputFactory();
 	//create output
 	Output* out = OutputF->Create_Output("HTML, width:720, height:480, frame_rate:29.97");
 	//start output
